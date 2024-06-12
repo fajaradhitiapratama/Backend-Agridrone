@@ -20,9 +20,7 @@ exports.getSoil = async function (req, res) {
 };
 
 exports.getHistorySoil = async function (req, res) {
-  console.log("Request received to getHistorySoil function");
   const id = req.body.id;
-  console.log("Received ID:", id);
   console.log(req.body);
   firebase
     .get(rootRef)
