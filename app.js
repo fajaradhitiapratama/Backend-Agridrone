@@ -22,9 +22,10 @@ app.use(corsTypeTwo)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-// app.get('/', (req, res) => {
-//   res.send("tes123");
-// })
+// Root route
+app.get('/', (req, res) => {
+  res.send('Welcome to the API');
+});
 app.use('/router', coba)
 
 let server = require('http').createServer()
