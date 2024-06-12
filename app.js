@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const assert = require("assert");
 
 var config = require("./database/connect");
-const coba = require("./routes");
-// const { route } = require('./routes/routes')
+const coba = require("./routes/routes");
+const { route } = require('./routes/routes')
 const cors = require("cors");
 
 app = express();
