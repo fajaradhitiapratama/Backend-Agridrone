@@ -7,9 +7,9 @@
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app.js"
-    }
+    { "src": "/router/tampil_soil", "dest": "/router/tampil_soil" },
+    { "src": "/router/tampil_history_soil", "dest": "/router/tampil_history_soil" },
+    { "src": "/router/fb", "dest": "/router/fb" },
+    { "src": "/(.*)", "dest": "app.js" }
   ]
 }
