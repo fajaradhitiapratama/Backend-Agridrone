@@ -18,7 +18,7 @@ const corsTypeTwo = (req, res, next) => {
   next();
 };
 
-const coba = require("./routes/routes");
+const coba = require("./routes");
 
 app.use(cors());
 app.use(corsTypeTwo);
