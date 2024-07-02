@@ -56,32 +56,40 @@ exports.getHistoryWeather = async function (req, res) {
         return res.json({ success: false, data: error });
       });
   };
-exports.forecast = async function(req, res){
-
-    try {
-        const workbook = xlsx.readFile('./controller/forecast_weather.xlsx')
-        const sheetName = workbook.SheetNames[0]
-        const worksheet = workbook.Sheets[sheetName]
-        const weather_forecast = xlsx.utils.sheet_to_json(worksheet)
-    
-        const today = new Date()
-        const week = new Date()
-        week.setDate(today.getDate() + 7);
-    
-        var data_forecast = weather_forecast.filter(row => {
-            const rowDate = new Date(row.year, row.month - 1, row.day)
-            return rowDate >= today && rowDate <= week
-          })
+  const path = require('path');
+  const xlsx = require('xlsx');
+  
+  exports.forecast = async function(req, res) {
+      try {
+          // Gunakan path absolut
+          const filePath = path.join(__dirname, 'forecast_weather.xlsx');
+          console.log('File path:', filePath);  // Log jalur file
+          
+          const workbook = xlsx.readFile(filePath);
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+          const weather_forecast = xlsx.utils.sheet_to_json(worksheet);
+  
+          const today = new Date();
+          const week = new Date();
+          week.setDate(today.getDate() + 7);
+  
+          var data_forecast = weather_forecast.filter(row => {
+              const rowDate = new Date(row.year, row.month - 1, row.day);
+              return rowDate >= today && rowDate <= week;
+          });
+  
+          var weather_type = data_forecast.map(row => row.weather_main);
+          const perday = week_to_days(weather_type);
+  
+          return res.json({ success: true, data: perday });
         
-        var weather_type = data_forecast.map(row => row.weather_main)
-        const perday = week_to_days(weather_type);
-
-        return res.json({ success: true, data: perday})
-      
-    } catch (error) {
-        return res.json({ success: false, data: error })
-    }
-}
+      } catch (error) {
+          console.error('Error:', error);  // Log error untuk debugging
+          return res.json({ success: false, data: error });
+      }
+  };
+  
 
 const reshape = (array, rows, cols) => {
     if (array.length !== rows * cols) {
