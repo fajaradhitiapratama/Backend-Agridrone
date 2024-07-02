@@ -26,6 +26,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
 app.use("/router", coba);
+
+let server = require("http").createServer();
 const port = 8080;
 
 app.listen(port, function () {
