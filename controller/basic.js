@@ -59,7 +59,7 @@ exports.getHistoryWeather = async function (req, res) {
 exports.forecast = async function(req, res){
 
     try {
-        const workbook = xlsx.readFile('forecast_weather.xlsx')
+        const workbook = xlsx.readFile('./controller/forecast_weather.xlsx')
         const sheetName = workbook.SheetNames[0]
         const worksheet = workbook.Sheets[sheetName]
         const weather_forecast = xlsx.utils.sheet_to_json(worksheet)
