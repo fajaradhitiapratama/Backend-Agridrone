@@ -1,10 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const assert = require("assert");
 
-var config = require("./database/connect");
 const coba = require("./routes/routes");
-const { route } = require('./routes/routes')
 const cors = require("cors");
 
 app = express();
@@ -29,8 +26,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
 app.use("/router", coba);
-
-let server = require("http").createServer();
 const port = 8080;
 
 app.listen(port, function () {
