@@ -27,12 +27,14 @@ exports.getHistorySoil = async function(req, res){
     firebase.get(rootRef)
     .then((snapshot) => {
         if (snapshot.exists()) {
+            var data = snapshot.val()
             return res.json({ success: true, data: data.HISTORY.SOIL[id]})
         } else {
             return res.json({ success: false, data: 'No data available.' })
         }
     })
     .catch((error) => {
+        console.log(error)
         return res.json({ success: false, data: error })
     });
 }
